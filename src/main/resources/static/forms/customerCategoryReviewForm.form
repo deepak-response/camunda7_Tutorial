@@ -1,0 +1,56 @@
+{
+  "components": [
+    {
+      "label": "Customer Name",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1siusba",
+        "columns": null
+      },
+      "id": "Field_05xw6v4",
+      "key": "customerName",
+      "readonly": true
+    },
+    {
+      "label": "Loan Amount",
+      "type": "number",
+      "layout": {
+        "row": "Row_1siusba",
+        "columns": null
+      },
+      "id": "Field_07iyn0q",
+      "key": "loanAmount",
+      "readonly": true
+    },
+    {
+      "label": "Customer Category",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1wnomms",
+        "columns": null
+      },
+      "id": "Field_0xo7vw1",
+      "key": "category"
+    },
+    {
+      "label": "Remarks",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1foe592",
+        "columns": null
+      },
+      "id": "Field_0segmxn",
+      "key": "remarks",
+      "description": "Additionl Info"
+    }
+  ],
+  "type": "default",
+  "id": "customerCategoryReviewForm",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.12.1"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.19.0",
+  "schemaVersion": 9
+}

@@ -1,0 +1,77 @@
+{
+  "components": [
+    {
+      "label": "Customer Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0bordds",
+        "columns": null
+      },
+      "id": "Field_0g07nf9",
+      "key": "customerName",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Age",
+      "type": "number",
+      "layout": {
+        "row": "Row_0bordds",
+        "columns": null
+      },
+      "id": "Field_03glok4",
+      "key": "age",
+      "description": "Yrs",
+      "defaultValue": 21
+    },
+    {
+      "label": "Loan Amount",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_19qo1lx",
+        "columns": null
+      },
+      "id": "Field_04it425",
+      "key": "loanAmount",
+      "description": "INR",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "values": [
+        {
+          "label": "Home Loan",
+          "value": "home"
+        },
+        {
+          "label": "Car Loan",
+          "value": "car"
+        },
+        {
+          "label": "Personal Loan",
+          "value": "personal"
+        }
+      ],
+      "label": "Loan Type",
+      "type": "select",
+      "layout": {
+        "row": "Row_19qo1lx",
+        "columns": null
+      },
+      "id": "Field_12vd92i",
+      "key": "loanType",
+      "defaultValue": "home"
+    }
+  ],
+  "type": "default",
+  "id": "customerDataForm",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.12.1"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.19.0",
+  "schemaVersion": 9
+}

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_03ec3j7" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.12.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <bpmn:process id="pocConnectorProcess" name="POC Connector Process" isExecutable="true" camunda:historyTimeToLive="P30D">
+    <bpmn:startEvent id="StartEvent_1" name="Start Loan Process">
+      <bpmn:outgoing>Flow_0wkgrbg</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0wkgrbg" sourceRef="StartEvent_1" targetRef="task_customerDetails" />
+    <bpmn:userTask id="task_customerDetails" name="Get Customer Details" camunda:formRef="customerDataForm" camunda:formRefBinding="deployment">
+      <bpmn:incoming>Flow_0wkgrbg</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wlvwzi</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_1autzeg" name="End">
+      <bpmn:incoming>Flow_061iwyf</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1wlvwzi" sourceRef="task_customerDetails" targetRef="Gateway_0jb75q1" />
+    <bpmn:exclusiveGateway id="Gateway_0jb75q1" name="Loan Type?" default="Flow_1b9l4wz">
+      <bpmn:incoming>Flow_1wlvwzi</bpmn:incoming>
+      <bpmn:outgoing>Flow_061iwyf</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1b9l4wz</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_061iwyf" name="Home" sourceRef="Gateway_0jb75q1" targetRef="Event_1autzeg">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{loanType=='home'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_05jdmhi" name="End">
+      <bpmn:incoming>Flow_0cflr6d</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1b9l4wz" name="Car or Personal" sourceRef="Gateway_0jb75q1" targetRef="task_Identifycategory" />
+    <bpmn:sequenceFlow id="Flow_0u2unhw" sourceRef="task_Identifycategory" targetRef="Activity_1wa6i05" />
+    <bpmn:serviceTask id="task_Identifycategory" name="Identity Customer Category" camunda:class="com.example.workflow.delegates.CategoryDecisioning">
+      <bpmn:incoming>Flow_1b9l4wz</bpmn:incoming>
+      <bpmn:outgoing>Flow_0u2unhw</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0cflr6d" sourceRef="Activity_1wa6i05" targetRef="Event_05jdmhi" />
+    <bpmn:userTask id="Activity_1wa6i05" name="Review Loan Details" camunda:formRef="customerCategoryReviewForm" camunda:formRefBinding="deployment">
+      <bpmn:incoming>Flow_0u2unhw</bpmn:incoming>
+      <bpmn:outgoing>Flow_0cflr6d</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="pocConnectorProcess">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="172" y="142" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1uho8lw_di" bpmnElement="task_customerDetails">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1autzeg_di" bpmnElement="Event_1autzeg">
+        <dc:Bounds x="712" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="720" y="142" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0jb75q1_di" bpmnElement="Gateway_0jb75q1" isMarkerVisible="true">
+        <dc:Bounds x="425" y="92" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="421" y="68" width="58" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1hurmgb_di" bpmnElement="task_Identifycategory">
+        <dc:Bounds x="530" y="230" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_05jdmhi_di" bpmnElement="Event_05jdmhi">
+        <dc:Bounds x="892" y="252" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="900" y="295" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0nregip_di" bpmnElement="Activity_1wa6i05">
+        <dc:Bounds x="700" y="230" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0wkgrbg_di" bpmnElement="Flow_0wkgrbg">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wlvwzi_di" bpmnElement="Flow_1wlvwzi">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="425" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_061iwyf_di" bpmnElement="Flow_061iwyf">
+        <di:waypoint x="475" y="117" />
+        <di:waypoint x="712" y="117" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="579" y="99" width="30" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1b9l4wz_di" bpmnElement="Flow_1b9l4wz">
+        <di:waypoint x="450" y="142" />
+        <di:waypoint x="450" y="270" />
+        <di:waypoint x="530" y="270" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="427" y="283" width="78" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0u2unhw_di" bpmnElement="Flow_0u2unhw">
+        <di:waypoint x="630" y="270" />
+        <di:waypoint x="700" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cflr6d_di" bpmnElement="Flow_0cflr6d">
+        <di:waypoint x="800" y="270" />
+        <di:waypoint x="892" y="270" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
